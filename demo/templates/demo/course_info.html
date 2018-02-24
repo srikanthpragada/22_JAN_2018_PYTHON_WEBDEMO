@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> {{ course.name }} </title>
+</head>
+<body>
+<h1>{{ course.name | upper }} </h1>
+
+<table border="1" cellpadding="5pt">
+    <tr>
+        <td> Duration :</td>
+        <td> {{ course.duration }} hours</td>
+    </tr>
+
+    <tr>
+        <td> Course Fee :</td>
+        <td>
+            {{ course.price | floatformat:2 }} INR
+            {% if discount %}
+               <br/>
+               Discount : {{ discount }}
+               <br/>
+               You Pay : {{ netprice }}
+            {% endif %}
+        </td>
+    </tr>
+</table>
+
+<h3>Topics</h3>
+<ul>
+    {% for topic in course.topics %}
+    <li>{{ topic }}</li>
+    {% endfor %}
+</ul>
+
+
+</body>
+</html>
