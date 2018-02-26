@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Course</title>
+</head>
+<body>
+<h1>Add Course</h1>
+
+<form method="post">
+    {% csrf_token %}
+    Course Title <br/>
+    <input type="text" name="title" />
+    <p></p>
+    Course Duration <br/>
+    <input type="number" name="duration" />
+    <p></p>
+    Course Fee <br/>
+    <input type="number" name="fee" />
+    <p></p>
+    <input type="submit" value="Add Course"/>
+</form>
+
+<h3> {{ message }} </h3>
+</body>
+</html>

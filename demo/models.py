@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Course:
@@ -11,4 +12,5 @@ class Course:
 
     def __str__(self):
         return "%s %d %d" % (self.name, self.duration, self.price)
+
 
