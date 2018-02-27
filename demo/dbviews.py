@@ -1,5 +1,6 @@
 from .dbmodel import DbCourse
 from django.shortcuts import render
+from . forms import AddCourseForm
 
 import sqlite3
 
@@ -55,7 +56,43 @@ def db_add_course(request):
             if con:
                 con.close()
 
-    else:
+    else:  # GET request
         print("Get Request")
 
     return render(request, 'demo/db_add_course.html', {"message" : message})
+
+
+def db_form_add_course(request):
+    message = ''
+    if request.method == "POST":
+        # copy data from request object to form fields
+        form = AddCourseForm(request.POST)  # Bound form
+        # validation done, if successful copies data to cleaned_data
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            duration = form.cleaned_data['duration']
+            fee  = form.cleaned_data['fee']
+            # insert a row into COURSES
+            con = None
+            try:
+                con = sqlite3.connect("db.sqlite3")
+                cur = con.cursor()
+                cur.execute("insert into courses (title,duration,fee) values(?,?,?)",
+                         (title,duration,fee))
+                if cur.rowcount == 1:
+                    con.commit()
+                    message = "Added Course Successfully!"
+
+                cur.close()
+            except Exception as ex:
+                print(ex)
+                message  = "Sorry! Could not add course!"
+            finally:
+                if con:
+                    con.close()
+    else:
+        form = AddCourseForm( label_suffix = '')   # Unbound form
+
+    print(form)
+    return render(request, 'demo/db_form_add_course.html',
+                  {"message" : message, 'form' : form})
