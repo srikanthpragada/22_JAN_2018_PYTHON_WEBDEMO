@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Book</title>
+</head>
+<body>
+<h1>Add Book</h1>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <div>Book Title</div>
+    {{ form.title }}
+    <div>Author Name</div>
+    {{ form.author }}
+    <div>Book Price</div>
+    {{ form.price }}
+    <div>Book Type :
+    {% for c in form.btype.field.choices  %}
+         <input type="radio"  name="btype"  value="{{c.0}}">{{c.1}}
+    {% endfor %}
+
+    </div>
+    <input type="submit" value="Add Book"/>
+
+    <ul>
+      {% for ef,em in form.errors.items %}
+         {% for msg in em %}
+              <li> Error in {{ ef}} -> {{ msg }} </li>
+         {% endfor %}
+      {% endfor %}
+    </ul>
+
+</form>
+
+</body>
+</html>
