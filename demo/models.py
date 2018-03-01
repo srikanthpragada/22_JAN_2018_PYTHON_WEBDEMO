@@ -1,6 +1,5 @@
 from django.db import models
 
-
 # Create your models here.
 
 class Course:
@@ -12,5 +11,15 @@ class Course:
 
     def __str__(self):
         return "%s %d %d" % (self.name, self.duration, self.price)
+
+
+class Account(models.Model):
+    customer = models.CharField(max_length=30)
+    email = models.EmailField()
+    mobile = models.CharField(max_length=10)
+    balance = models.FloatField()
+
+    def __str__(self):
+        return self.customer
 
 
