@@ -1,8 +1,23 @@
 from .dbmodel import DbCourse
 from django.shortcuts import render
-from . forms import AddCourseForm
+from .forms import AddCourseForm, AddAccountForm
+from demo.models import Account
 
 import sqlite3
+
+
+def add_account(request):
+    message = ""
+    if request.method== "POST":
+       f = AddAccountForm(request.POST)
+       if f.is_valid():
+           #a = Account(f.cleaned_data)
+           f.save()
+           message = "Added Account Successfully!"
+
+    else:
+        f = AddAccountForm()
+    return render(request, 'demo/add_account.html', {'form': f, 'message' : message})
 
 
 def course_tuple_to_dbcourse(t):
@@ -36,14 +51,14 @@ def db_add_course(request):
         title = request.POST["title"]
         duration = request.POST["duration"]
         fee = request.POST["fee"]
-        print(title,duration,fee)
+        print(title, duration, fee)
         # insert a row into COURSES
         con = None
         try:
             con = sqlite3.connect("db.sqlite3")
             cur = con.cursor()
             cur.execute("insert into courses (title,duration,fee) values(?,?,?)",
-                         (title,duration,fee))
+                        (title, duration, fee))
             if cur.rowcount == 1:
                 con.commit()
                 message = "Added Course Successfully!"
@@ -51,7 +66,7 @@ def db_add_course(request):
             cur.close()
         except Exception as ex:
             print(ex)
-            message  = "Sorry! Could not add course!"
+            message = "Sorry! Could not add course!"
         finally:
             if con:
                 con.close()
@@ -59,7 +74,7 @@ def db_add_course(request):
     else:  # GET request
         print("Get Request")
 
-    return render(request, 'demo/db_add_course.html', {"message" : message})
+    return render(request, 'demo/db_add_course.html', {"message": message})
 
 
 def db_form_add_course(request):
@@ -71,14 +86,14 @@ def db_form_add_course(request):
         if form.is_valid():
             title = form.cleaned_data['title']
             duration = form.cleaned_data['duration']
-            fee  = form.cleaned_data['fee']
+            fee = form.cleaned_data['fee']
             # insert a row into COURSES
             con = None
             try:
                 con = sqlite3.connect("db.sqlite3")
                 cur = con.cursor()
                 cur.execute("insert into courses (title,duration,fee) values(?,?,?)",
-                         (title,duration,fee))
+                            (title, duration, fee))
                 if cur.rowcount == 1:
                     con.commit()
                     message = "Added Course Successfully!"
@@ -86,13 +101,13 @@ def db_form_add_course(request):
                 cur.close()
             except Exception as ex:
                 print(ex)
-                message  = "Sorry! Could not add course!"
+                message = "Sorry! Could not add course!"
             finally:
                 if con:
                     con.close()
     else:
-        form = AddCourseForm( label_suffix = '')   # Unbound form
+        form = AddCourseForm(label_suffix='')  # Unbound form
 
     print(form)
     return render(request, 'demo/db_form_add_course.html',
-                  {"message" : message, 'form' : form})
+                  {"message": message, 'form': form})

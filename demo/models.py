@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Create your models here.
 
 class Course:
@@ -23,3 +24,12 @@ class Account(models.Model):
         return self.customer
 
 
+class Transaction(models.Model):
+    trans_amount = models.FloatField()
+    trans_date = models.DateField()
+    trans_type = models.CharField(max_length=1)
+    trans_remarks = models.CharField(null=True, max_length=50)
+    account = models.ForeignKey(Account, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.trans_type + ' - ' + str(self.trans_amount)

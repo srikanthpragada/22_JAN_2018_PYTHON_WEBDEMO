@@ -13,5 +13,6 @@ urlpatterns = [
     path('add_course/', demo.dbviews.db_add_course),
     path('add_course_form/', demo.dbviews.db_form_add_course),
     path('add_book/', demo.views.add_book),
+    path('add_account/', demo.dbviews.add_account),
 
 ]

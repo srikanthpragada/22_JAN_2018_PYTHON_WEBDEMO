@@ -1,5 +1,13 @@
 import django.forms as forms
+# from django.forms import ModelForm
 import django.core.validators as v
+from demo.models import Account
+
+
+class AddAccountForm(forms.ModelForm):
+    class Meta:
+        model = Account
+        fields = ['customer', 'email', 'mobile', 'balance']
 
 
 class AddCourseForm(forms.Form):
@@ -14,7 +22,7 @@ class AddBookForm(forms.Form):
     author = forms.CharField(max_length=30, label="Author Name")
     price = forms.IntegerField(label="Book Price", min_value=100)
     btype = forms.ChoiceField(label="Book Type", required=True,
-                              widget= forms.RadioSelect,
+                              widget=forms.RadioSelect,
                               choices=[('k', 'Kindle Edition'),
                                        ('p', "PaperBack"),
                                        ('h', 'Hardbound')])

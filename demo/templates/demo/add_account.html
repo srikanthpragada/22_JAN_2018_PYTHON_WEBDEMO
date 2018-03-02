@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Account</title>
+</head>
+<body>
+<h1>Add Account</h1>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <p></p>
+    <input type="submit" value="Add Account"/>
+</form>
+
+<h3> {{ message }} </h3>
+</body>
+</html>
