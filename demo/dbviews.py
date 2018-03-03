@@ -11,8 +11,7 @@ def add_account(request):
     if request.method== "POST":
        f = AddAccountForm(request.POST)
        if f.is_valid():
-           #a = Account(f.cleaned_data)
-           f.save()
+           f.save()  # Save to table and commit
            message = "Added Account Successfully!"
 
     else:
