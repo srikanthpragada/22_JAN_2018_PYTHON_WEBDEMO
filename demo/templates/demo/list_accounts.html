@@ -7,4 +7,26 @@ List Account
 {% block content %}
 <h1>List Accounts</h1>
 
+<table  width="100%" border="1">
+     <tr>
+         <th>Customer</th>
+         <th>Email Address</th>
+         <th>Mobile</th>
+         <th>Balance</th>
+         <th></th>
+     </tr>
+
+     {% for a in accounts %}
+       <tr>
+           <td> {{ a.customer }} </td>
+           <td> {{ a.email }} </td>
+           <td> {{ a.mobile }} </td>
+           <td> {{ a.balance }} </td>
+           <td> <a href="/demo/transactions/{{a.id}}">Transactions</a> </td>
+       </tr>
+
+      {% endfor %}
+</table>
+
+
 {% endblock %}

@@ -1,13 +1,21 @@
 import django.forms as forms
 # from django.forms import ModelForm
 import django.core.validators as v
-from demo.models import Account
+from demo.models import Account, Transaction
 
 
 class AddAccountForm(forms.ModelForm):
     class Meta:
         model = Account
         fields = ['customer', 'email', 'mobile', 'balance']
+
+
+class AddTransactionForm(forms.ModelForm):
+    class Meta:
+        model = Transaction
+        fields = ['trans_date', 'trans_amount',
+                  'trans_type', 'trans_remarks' , 'account']
+
 
 
 class AddCourseForm(forms.Form):

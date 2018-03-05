@@ -1,0 +1,36 @@
+{% extends 'demo/master.html' %}
+
+{% block title %}
+Transaction By Account
+{% endblock %}
+
+{% block content %}
+<h1>Transactions By Account [{{ id }}]</h1>
+
+{% if transactions %}
+<table width="100%" border="1">
+    <tr>
+        <th>Date</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th>Remarks</th>
+        <th></th>
+    </tr>
+
+    {% for t in transactions %}
+    <tr>
+        <td> {{ t.trans_date }}</td>
+        <td> {{ t.trans_type }}</td>
+        <td> {{ t.trans_amount | floatformat:2 }}</td>
+        <td> {{ t.trans_remarks}}</td>
+        <td> <a href="/demo/edit_trans/{{t.id}}">Edit</a> </td>
+    </tr>
+
+    {% endfor %}
+</table>
+{% else %}
+  <h3>No Transactions Found!</h3>
+
+{% endif %}
+
+{% endblock %}

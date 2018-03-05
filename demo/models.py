@@ -15,16 +15,18 @@ class Course:
 
 
 class Account(models.Model):
+    id = models.IntegerField(primary_key=True)
     customer = models.CharField(max_length=30)
     email = models.EmailField()
     mobile = models.CharField(max_length=10)
     balance = models.FloatField()
 
     def __str__(self):
-        return self.customer
+        return str(self.id) + " - " + self.customer
 
 
 class Transaction(models.Model):
+    id = models.IntegerField(primary_key=True)
     trans_amount = models.FloatField()
     trans_date = models.DateField()
     trans_type = models.CharField(max_length=1)

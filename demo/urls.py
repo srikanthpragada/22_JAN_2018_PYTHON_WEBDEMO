@@ -17,5 +17,10 @@ urlpatterns = [
     path('home/', demo.accountviews.home, name='home'),
     path('list_accounts/', demo.accountviews.list_accounts, name='list_accounts'),
     path('add_account/', demo.accountviews.add_account, name='add_account'),
+    path('add_transaction/', demo.accountviews.add_transaction, name='add_transaction'),
+    path('transactions/<int:id>', demo.accountviews.transactions_by_account,
+             name='transactions'),
+    path('edit_trans/<int:id>', demo.accountviews.edit_trans,
+             name='edit_trans'),
 
 ]
