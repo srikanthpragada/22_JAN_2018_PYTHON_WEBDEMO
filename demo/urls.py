@@ -22,5 +22,7 @@ urlpatterns = [
              name='transactions'),
     path('edit_trans/<int:id>', demo.accountviews.edit_trans,
              name='edit_trans'),
+    path('ajax/', demo.views.ajax),
+    path('get_account_name/', demo.views.get_account_name),
 
 ]

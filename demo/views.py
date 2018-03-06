@@ -3,6 +3,7 @@ from .forms import AddBookForm
 # Create your views here.
 from django.http import HttpResponse
 from .models import Course
+from . models import Account
 
 
 def index(request):
@@ -29,9 +30,22 @@ def course_info(request):
     return render(request, "demo/course_info.html", context)
 
 
+def ajax(request):
+    return render(request, 'demo/ajax.html')
+
+
+def get_account_name(request):
+    id = request.GET["id"]
+    try:
+        a = Account.objects.get(pk=id)
+        return HttpResponse(a.customer)
+    except:
+        return HttpResponse(status=404)
+
+
 def add_book(request):
     if request.method == "POST":
-        f = AddBookForm(request.POST)    # bound form
+        f = AddBookForm(request.POST)  # bound form
         if f.is_valid():
             print("Valid")
         else:

@@ -19,8 +19,14 @@ Transaction By Account
 
     {% for t in transactions %}
     <tr>
-        <td> {{ t.trans_date }}</td>
-        <td> {{ t.trans_type }}</td>
+        <td> {{ t.trans_date | date:'d-M-Y' }}</td>
+        <td>
+             {% if t.trans_type == 'd' %}
+                Deposit
+             {% else %}
+                Withdraw
+             {% endif %}
+        </td>
         <td> {{ t.trans_amount | floatformat:2 }}</td>
         <td> {{ t.trans_remarks}}</td>
         <td> <a href="/demo/edit_trans/{{t.id}}">Edit</a> </td>

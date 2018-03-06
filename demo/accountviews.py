@@ -15,26 +15,27 @@ def home(request):
 
 def list_accounts(request):
     return render(request, 'demo/list_accounts.html',
-                  {'accounts' : Account.objects.all()})
+                  {'accounts': Account.objects.all()})
 
-def transactions_by_account(request,id):
+
+def transactions_by_account(request, id):
     return render(request, 'demo/transactions_by_account.html',
-                  {'id' : id,
-                   'transactions' : Transaction.objects.filter(account__id = id)})
+                  {'id': id,
+                   'transactions': Transaction.objects.filter(account__id=id)})
 
-def edit_trans(request,id):
+
+def edit_trans(request, id):
     message = ""
+    trans = Transaction.objects.get(pk=id)
     if request.method == "POST":
-        f = AddTransactionForm(request.POST)
+        f = AddTransactionForm(request.POST, instance=trans)
         if f.is_valid():
             f.save()  # Save to table and commit
             message = "Update Transactions Successfully!"
-
     else:
-        trans = Transaction.objects.get(pk = id)
-        f = AddTransactionForm(trans)
-    return render(request, 'demo/edit_trans.html', {'form': f, 'message': message})
+        f = AddTransactionForm(instance=trans)
 
+    return render(request, 'demo/edit_trans.html', {'form': f, 'message': message})
 
 
 def add_account(request):

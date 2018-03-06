@@ -1,0 +1,21 @@
+{% extends 'demo/master.html' %}
+
+{% block title %}
+Edit Transaction
+{% endblock %}
+
+{% block content %}
+<h1>Edit Transaction</h1>
+
+<form method="post" action="">
+    {% csrf_token %}
+    <table>
+        {{ form }}
+    </table>
+    <p></p>
+    <input type="submit" value="Update"/>
+</form>
+
+<h3> {{ message }} </h3>
+
+{% endblock %}
