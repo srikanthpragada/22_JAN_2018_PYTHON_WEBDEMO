@@ -4,6 +4,7 @@ from django.urls import path
 import demo.dbviews
 import demo.accountviews
 import demo.views
+import demo.cookie_views as cviews
 
 urlpatterns = [
     path('index/', demo.views.index, name='home'),
@@ -24,5 +25,7 @@ urlpatterns = [
              name='edit_trans'),
     path('ajax/', demo.views.ajax),
     path('get_account_name/', demo.views.get_account_name),
+    path('add_cookie/', cviews.add_cookie),
+    path('list_cookies/', cviews.list_cookies),
 
 ]
