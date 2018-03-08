@@ -6,9 +6,13 @@
 </head>
 <body>
 <h2>Available Names</h2>
-{% for n in names %}
-   {{ n }} <br/>
-{% endfor %}
+{% if length == 0 %}
+ <h3>No names found!</h3>
+{% else %}
+  {% for n in names %}
+     {{ n }} <br/>
+  {% endfor %}
+{% endif %}
 
 <h3>Add Name</h3>
 <form method="post">

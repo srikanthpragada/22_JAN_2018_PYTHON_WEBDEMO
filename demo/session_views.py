@@ -15,4 +15,5 @@ def list_names(request):
         # create key names in the session
         request.session['names'] = names
 
-    return render(request, 'demo/session_names.html', {'names': names})
+    return render(request, 'demo/session_names.html',
+                  {'names': names , 'length' : len(names)})

@@ -5,6 +5,8 @@ import demo.dbviews
 import demo.accountviews
 import demo.views
 import demo.cookie_views as cviews
+import demo.session_views as sviews
+import demo.rest_views as rest_views
 
 urlpatterns = [
     path('index/', demo.views.index, name='home'),
@@ -27,5 +29,8 @@ urlpatterns = [
     path('get_account_name/', demo.views.get_account_name),
     path('add_cookie/', cviews.add_cookie),
     path('list_cookies/', cviews.list_cookies),
+    path('session_names/', sviews.list_names),
+    path('accounts/', rest_views.list_accounts),
+    path('accounts/<int:pk>', rest_views.get_account),
 
 ]
